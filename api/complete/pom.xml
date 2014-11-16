@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>gs-rest-service</artifactId>
+    <artifactId>payday</artifactId>
     <version>0.1.0</version>
 
     <parent>
@@ -21,7 +21,7 @@
     </dependencies>
 
     <properties>
-        <start-class>hello.Application</start-class>
+        <start-class>payday.Application</start-class>
     </properties>
 
     <build>
