@@ -11,8 +11,13 @@ public class EmployeeController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/employee")
+    @RequestMapping("api/employee")
     public Employee employeee(@RequestParam(value="name", defaultValue="World") String name) {
+        return new Employee(counter.incrementAndGet(),
+                            String.format(template, name));
+    }
+    @RequestMapping("api/employee/all")
+    public Employee employeeeAll(@RequestParam(value="name", defaultValue="World") String name) {
         return new Employee(counter.incrementAndGet(),
                             String.format(template, name));
     }

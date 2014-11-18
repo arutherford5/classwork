@@ -11,7 +11,7 @@ public class BusinessController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/business")
+    @RequestMapping("api/business")
     public Business business(@RequestParam(value="name", defaultValue="World") String name) {
         return new Business(counter.incrementAndGet(),
                             String.format(template, name));
