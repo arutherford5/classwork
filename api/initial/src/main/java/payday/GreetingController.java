@@ -33,4 +33,13 @@ public class GreetingController {
         return "OK 200";
 
     }
+
+    @RequestMapping(value = "api/greeting/{tid}", method = RequestMethod.PUT)
+    public @ResponseBody String greetingPUT(@PathVariable(value="tid") long tid, @RequestBody Greeting greeting, HttpServletRequest request){
+        System.out.println(tid + " " + greeting.getContent() + " " + greeting.getId());
+
+
+        return "OK 200";
+
+    }
 }
