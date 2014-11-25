@@ -1,5 +1,9 @@
 package payday;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Greeting {
 	
 	private final long id;

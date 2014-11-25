@@ -33,8 +33,8 @@ public class TransactionController {
       //  return new Transaction(counter.incrementAndGet(),
         //                   String.format(template, name));
     //}
-   @RequestMapping("api/editTransaction")
-    public boolean editTransaction(@RequestParam(value)){
+   //@RequestMapping("api/editTransaction")
+    //public boolean editTransaction(@RequestParam(value)){
 
-    }
+    //}
 }
