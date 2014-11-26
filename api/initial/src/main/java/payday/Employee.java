@@ -1,9 +1,17 @@
 package payday;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Employee {
 	
-	private final long id;
-	private final String content;
+	private long id;
+	private String content;
+
+    public Employee(){
+
+    }
 	
 	public Employee(long id, String content) {
 		this.id = id;
@@ -17,4 +25,12 @@ public class Employee {
 	public String getContent(){
 		return content;
 	}
+
+    public void setId(long id){
+        this.id = id;
+    }
+
+    public void setContent(String content){
+        this.content = content;
+    }
 }
