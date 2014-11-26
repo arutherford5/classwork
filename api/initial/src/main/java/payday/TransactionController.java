@@ -1,10 +1,17 @@
 package payday;
 
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.Map;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.*;
 
 @RestController
 public class TransactionController {
@@ -12,29 +19,49 @@ public class TransactionController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("api/transaction")
-    public Transaction transcation(@RequestParam Map<String,String> requestParams) throws Exception{
-        String name = requestParams.get("name");
-        String description = requestParams.get("description");
-        String category = requestParams.get("category");
-        int number = Integer.parseInt(requestParams.get("number"));
-        int businessID = Integer.parseInt(requestParams.get("businessID"));
+    //Get all transactions
+    @RequestMapping(value = "api/business/{bid}/transactions", method = RequestMethod.GET)
+    public @ResponseBody String transactionsGET(@PathVariable(value="bid") long bid, HttpServletRequest request){
+        System.out.println(bid);
 
-        System.out.println(name + description + category + number + businessID);
-        //int number = 7;
-        //String description = requestParams.get("description");
-        //String category = requestParams.get("category");
+        return "OK 200";
 
-        return new Transaction(counter.incrementAndGet(),businessID,String.format(template, name), number, category,description);
-        
     }
-    //@RequestMapping("api/transactionID")
-    //public Transaction transcationID(@RequestParam(value="name", defaultValue="World") String name) {
-      //  return new Transaction(counter.incrementAndGet(),
-        //                   String.format(template, name));
-    //}
-   //@RequestMapping("api/editTransaction")
-    //public boolean editTransaction(@RequestParam(value)){
 
-    //}
+    //Create transaction
+    @RequestMapping(value = "api/business/{bid}/transaction", method = RequestMethod.POST)
+    public @ResponseBody String transactionPOST(@PathVariable(value="bid") long bid, @RequestBody Transaction transaction, HttpServletRequest request){
+        System.out.println(bid + transaction.getId()+" "+ transaction.getContent() + transaction.getBusinessID() + transaction.getCategory() + transaction.getdescription());
+
+        return "OK 200";
+
+    }
+
+    //get transaction
+    @RequestMapping(value = "api/business/{bid}/transaction/{tid}", method = RequestMethod.GET)
+    public @ResponseBody Transaction transactionGET(@PathVariable(value="bid") long bid, @PathVariable(value="tid") long tid,HttpServletRequest request){
+        System.out.println(bid + " tid " + tid);
+
+        //return "OK 200";
+        return new Transaction(1234,1111,"content",23501,"category1","descrip1");
+    }
+
+    //Update transaction
+    @RequestMapping(value = "api/business/{bid}/transaction/{tid}", method = RequestMethod.PUT)
+    public @ResponseBody String transactionPUT(@PathVariable(value="bid") long bid, @PathVariable(value="tid") long tid,@RequestBody Transaction transaction, HttpServletRequest request){
+        System.out.println(bid +" update transaction " + tid);
+
+        return "OK 200";
+
+    }
+
+    //Delete transaction
+    @RequestMapping(value = "api/business/{bid}/transaction/{tid}", method = RequestMethod.DELETE)
+    public @ResponseBody String transactionDELETE(@PathVariable(value="bid") long bid,  @PathVariable(value="tid") long tid,HttpServletRequest request){
+        System.out.println(bid +" delete transaction " + tid);
+
+        return "OK 200";
+
+    }
+
 }
