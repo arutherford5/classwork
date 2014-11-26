@@ -1,5 +1,6 @@
 package payday;
 
+import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.*;
+import java.util.LinkedList.*;
 
 
 @RestController
@@ -22,10 +24,22 @@ public class EmployeeController {
 
     //Get all employees
     @RequestMapping(value = "api/business/{bid}/employees", method = RequestMethod.GET)
-    public @ResponseBody String employeesGET(@PathVariable(value="bid") long bid, HttpServletRequest request){
+    public @ResponseBody LinkedList employeesGET(@PathVariable(value="bid") long bid, HttpServletRequest request){
         System.out.println(bid);
+        Employee test = new Employee(1234, "bob2");
+        Employee test2 = new Employee(2345, "steve2");
+        Employee test3 = new Employee(3456, "ed");
+        Employee test4 = new Employee(4567, "george");
 
-        return "200 OK";
+        Employee[] array = {test, test2, test3, test4};
+
+        LinkedList list = new LinkedList();
+        list.addLast(test);
+        list.addLast(test2);
+        list.addLast(test3);
+        list.addLast(test4);
+
+        return list;
 
     }
 
